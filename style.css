@@ -1,85 +1,71 @@
-    const inp = document.getElementById("inp");
-    const enter = document.getElementById("enter");
-    const remove = document.getElementById("remove");
-    const remove1 = document.getElementById("remove1");
-    const result = document.getElementById("result");
-    const result1 = document.getElementById("result1");
-    const removev = document.getElementById("removev");
-    const removev1 = document.getElementById("removev1");
-    let list = JSON.parse(localStorage.getItem("myList")) || [];;
-    let list1 = JSON.parse(localStorage.getItem("myList1")) || [];;
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
 
+body {
+    background-color: hsl(0, 0%, 25%);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
-    function hlp(idk) {
-        let value = "";
-        for (let i = 0; i < idk.length; i++){
-            value += idk[i] + " , ";
-        }
-        return value;
-    }
-    result.textContent = `results : ${hlp(list)}`;
-    result1.textContent = `results : ${hlp(list1)}`;
-    
-    inp.addEventListener("keydown", function (event) {
-    if (event.key === "Enter") {
-        enter.click(); // يضغط على زر enter البرمجي لوحده!
-    }
-});
-    enter.addEventListener("click", function () {
-        const value = inp.value.trim();
-        if (value === "") {
-            result.textContent = `results : enter a valid name`;
-            result1.textContent = `results : enter a valid number`;
-        }
-        else if (!isNaN(value)) {
-            list1.push(value);
-            result1.textContent = `results : ${hlp(list1)}`;
-            result.textContent = `results : ${hlp(list)}`;
-            localStorage.setItem("myList1", JSON.stringify(list1));
+#main {
+    background-color: white;
+    color: black;
+    width: 350px;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
 
-        }
-        else {
-            list.push(value);
-            result.textContent = `results : ${hlp(list)}`;
-            result1.textContent = `results : ${hlp(list1)}`;
-            localStorage.setItem("myList", JSON.stringify(list));
-        }
-    });
-    remove1.addEventListener("click", function () {
-        if (list1.length === 0) {
-            result1.textContent = `results : there no number to remove!`;
-        }
-        else {
-        list1.pop();
-        result.textContent = `results : ${hlp(list)}`;
-        result1.textContent = `results : ${hlp(list1)}`;
-        localStorage.setItem("myList1", JSON.stringify(list1));
-        
-        }
-    });
-    remove.addEventListener("click", function () {
-        if (list.length === 0) {
-            result.textContent = `results : there no name to remove!`;
-        }
-        else {
-        list.pop();
-        result.textContent = `results : ${hlp(list)}`;
-        result1.textContent = `results : ${hlp(list1)}`;
-        localStorage.setItem("myList", JSON.stringify(list));
-        
-        }
-    });
-removev.addEventListener("click", function () {
-    list = [];
-    result.textContent = `results : ${hlp(list)}`;
-    result1.textContent = `results : ${hlp(list1)}`;
-    localStorage.setItem("myList", JSON.stringify(list));
+#main input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    transition: 0.3s;
+}
 
-});
-removev1.addEventListener("click", function () {
-    list1 = [];
-    result.textContent = `results : ${hlp(list)}`;
-    result1.textContent = `results : ${hlp(list1)}`;
-    localStorage.setItem("myList1", JSON.stringify(list1));
+#main input:focus {
+    border-color: #000;
+}
 
-});
+#btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+}
+
+#btns button {
+    padding: 8px 14px;
+    font-size: 16px;
+    background-color: #222;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#btns button:hover {
+    background-color: #444;
+}
+
+.result-box {
+    font-size: 14px;
+    background-color: #f4f4f4;
+    padding: 10px;
+    border-radius: 6px;
+    word-break: break-all;
+}
