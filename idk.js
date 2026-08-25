@@ -19,9 +19,14 @@
     }
     result.textContent = `results : ${hlp(list)}`;
     result1.textContent = `results : ${hlp(list1)}`;
-
+    
+    inp.addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+        enter.click(); 
+    }
+});
     enter.addEventListener("click", function () {
-        const value = inp.value;
+        const value = inp.value.trim();
         if (value === "") {
             result.textContent = `results : enter a valid name`;
             result1.textContent = `results : enter a valid number`;
