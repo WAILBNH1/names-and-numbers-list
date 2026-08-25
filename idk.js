@@ -1,0 +1,80 @@
+    const inp = document.getElementById("inp");
+    const enter = document.getElementById("enter");
+    const remove = document.getElementById("remove");
+    const remove1 = document.getElementById("remove1");
+    const result = document.getElementById("result");
+    const result1 = document.getElementById("result1");
+    const removev = document.getElementById("removev");
+    const removev1 = document.getElementById("removev1");
+    let list = JSON.parse(localStorage.getItem("myList")) || [];;
+    let list1 = JSON.parse(localStorage.getItem("myList1")) || [];;
+
+
+    function hlp(idk) {
+        let value = "";
+        for (let i = 0; i < idk.length; i++){
+            value += idk[i] + " , ";
+        }
+        return value;
+    }
+    result.textContent = `results : ${hlp(list)}`;
+    result1.textContent = `results : ${hlp(list1)}`;
+
+    enter.addEventListener("click", function () {
+        const value = inp.value;
+        if (value === "") {
+            result.textContent = `results : enter a valid name`;
+            result1.textContent = `results : enter a valid number`;
+        }
+        else if (!isNaN(value)) {
+            list1.push(value);
+            result1.textContent = `results : ${hlp(list1)}`;
+            result.textContent = `results : ${hlp(list)}`;
+            localStorage.setItem("myList1", JSON.stringify(list1));
+
+        }
+        else {
+            list.push(value);
+            result.textContent = `results : ${hlp(list)}`;
+            result1.textContent = `results : ${hlp(list1)}`;
+            localStorage.setItem("myList", JSON.stringify(list));
+        }
+    });
+    remove1.addEventListener("click", function () {
+        if (list1.length === 0) {
+            result1.textContent = `results : there no number to remove!`;
+        }
+        else {
+        list1.pop();
+        result.textContent = `results : ${hlp(list)}`;
+        result1.textContent = `results : ${hlp(list1)}`;
+        localStorage.setItem("myList1", JSON.stringify(list1));
+        
+        }
+    });
+    remove.addEventListener("click", function () {
+        if (list.length === 0) {
+            result.textContent = `results : there no name to remove!`;
+        }
+        else {
+        list.pop();
+        result.textContent = `results : ${hlp(list)}`;
+        result1.textContent = `results : ${hlp(list1)}`;
+        localStorage.setItem("myList", JSON.stringify(list));
+        
+        }
+    });
+removev.addEventListener("click", function () {
+    list = [];
+    result.textContent = `results : ${hlp(list)}`;
+    result1.textContent = `results : ${hlp(list1)}`;
+    localStorage.setItem("myList", JSON.stringify(list));
+
+});
+removev1.addEventListener("click", function () {
+    list1 = [];
+    result.textContent = `results : ${hlp(list)}`;
+    result1.textContent = `results : ${hlp(list1)}`;
+    localStorage.setItem("myList1", JSON.stringify(list1));
+
+});
